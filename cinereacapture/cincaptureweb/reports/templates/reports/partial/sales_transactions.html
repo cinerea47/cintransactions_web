@@ -1,0 +1,99 @@
+
+
+
+
+
+
+
+    <table id="sales-table" hx-swap-oob="outerHTML"  class="table table-striped" >
+
+            <thead class="thead-dark table-info table-bordered center">
+      
+                <tr>
+                     <td scope="row">
+                             Partner
+                    </td>
+                    <td scope="row">
+                             Product
+                    </td>
+                    <td scope="row">
+                            Location
+                    </td>
+                    <td scope="row">
+                           City
+                    </td>
+                    <td scope="row">
+                             Transaction
+                    </td>
+
+                    <td scope="row">
+                             Amount
+                    </td>
+                     <td scope="row">
+                             Date
+                    </td>
+                     <td scope="row">
+                             Time
+                    </td>
+                     <td scope="row">
+                             Day
+                    </td>
+                    <td scope="row">
+                             Teller
+                    </td>
+
+                    <td class="text-center" scope="row" colspan="3">
+                        Manage
+                    </td>
+                </tr>
+                </thead>
+                <tbody class="table-bordered">
+        {% for trans in servTrans %}
+                
+
+
+                    <td scope="row">
+                            {{trans.vendor.name}}
+                    </td>
+
+                    <td scope="row">
+                            {{trans.vendor.description}}
+                    </td>
+                    <td scope="row">
+                           {{trans.device.branch}}
+                    </td>
+                          <td scope="row">
+                           {{trans.device.city}}
+                    </td>
+
+                    <td scope="row">
+                           {{trans.type}}
+                    </td>
+                    <td scope="row">
+                           {{trans.amount}}
+                    </td>
+                      <td scope="row">
+                           {{trans.transaction_date}}
+                    </td>
+                    <td scope="row">
+                        {{trans.time}}
+                    </td>
+                    <td scope="row">
+                        {{trans.day}}
+                    </td>
+                     <td scope="row">
+                        {{trans.user.firstname}} {{trans.user.lastname}}
+                    </td>
+
+                  
+                    <td scope="row">
+                        <a class="btn btn-warning" href="">Manage </a>
+                    </td>
+
+                </tr>
+                
+    {% endfor %}
+    </tbody>
+    </table>
+
+

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+.themed-grid-col {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.themed-container {
+  padding: .75rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(0, 123, 255, .15);
+  border: 1px solid rgba(0, 123, 255, .2);
+}
+.h3{
+    text-align: center;
+    color: #94650A;
+  }
+  .h5{
+    color: #94650A;
+  }
+  .searchbar{
+      width: 100%;
+      height: 56px;
+      background-color: black;
+      padding: 3px;
+      margin-bottom: 2px;
+  }
+  .searchArea{
+    width: 280px;
+    float: right;
+  }
+  #hori-nav-bar{
+    display: flex;
+  }
+  @media screen and (max-width: 800px) {
+    #card-dhitemlist{
+      margin-bottom:5px; 
+      background-color:#f2f2f2
+    }
+   
+  }
+  @media screen and (min-width: 800px) {
+    #hori-nav-bar{
+      display: none;
+    }
+  }
+  
+
+</style>
+
+
+    <!----- heading -------->
+  	<div class=" px-3 py-6 mx-auto text-center ">
+			<h3  id="home_heading" class="display-4 font-weight-bold home_heading">
+             Vendor Management
+				</h3>
+		  </div>
+    <table class="table table-striped">
+
+        <thead class="thead-dark table-secondary center searchTable" >
+        <div class="text-center ">
+
+
+            <tr>
+                <td scope="row">
+                    Registered Vendors: {{total_vendors}}
+                </td>
+
+                 <td scope="row">
+                  <a  href="/vendor/create" class="btn btn-info text-center  align-items-center " >Create A Service Vendor </a>
+                    </td>
+
+
+                  <form class="form-search-users" method="post">{% csrf_token %}
+                      <td scope="row">
+                      <input type="text" name="search" placeholder="search" />
+
+                    <button type="submit" class="btn btn-warning"   >Search</button>
+                  </form>
+                  </td>
+
+
+
+              </tr>
+    </table>
+    <hr/>
+
+
+    <table class="table table-striped">
+
+        
+            <thead class="thead-dark table-dark center">
+       
+      
+                <tr>
+                    <td scope="row">
+                             Description
+                    </td>
+                    <td scope="row">
+                            name
+                    </td>
+                    <td scope="row">
+                             Service_name
+                    </td>
+
+                    <td class="text-center" scope="row" colspan="3">
+                        Manage
+                    </td>
+                </tr>
+                </thead>
+                <tbody class="table-striped">
+        {% for vendor in vendors %}
+                
+                      <tr>
+
+                    <td scope="row">
+                            {{vendor.description}}
+                    </td>
+
+                    <td scope="row">
+                            {{vendor.name}}
+                    </td>
+                    <td scope="row">
+                           {{vendor.service_name}}
+
+                    </td>
+
+
+                    <td scope="row">
+                        <a  class="btn btn-warning" href="">Manage</a>
+                    </td>
+
+                </tr>
+                
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock content %}

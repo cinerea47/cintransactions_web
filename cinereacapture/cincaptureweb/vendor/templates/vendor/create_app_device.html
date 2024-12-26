@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+  .form-create-client {
+  width: 100%;
+  max-width: 690px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-create-client.form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-create-client.form-control:focus {
+    z-index: 2;
+  }
+  .form-create-client input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-create-client input[type="text"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-create-client input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+    color: #94650A;
+  }
+  .h5{
+    color: #94650A;
+  }
+
+  .inputDateOfReg {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+  [type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  }
+
+  [type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    color: #94650A;
+  }
+
+
+
+}
+
+</style>
+
+<form class="form-create-client" method="Post">{% csrf_token %}
+
+  {% for field in FormResponse %}
+      <p>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+  {% endfor %}
+  {% if FormResponse.non_field_errors %}
+    <div style="color: red">
+      <p>{{FormResponse.non_field_errors}}</p>
+    </div>
+
+  {% endif %}
+
+  <h1 class="h3 mb-3 font-weight-normal">Device Registration</h1>
+
+  <h4 class="h5 mb-3 font-weight-normal"> Device Details </h4>
+
+  <label for="device_type" class="h5 mb-3 font-weight-normal">Select Device Type </label>
+  <select name="type" id="inputType" class="form-control" >
+
+    {% for type, device in device_types %}
+
+        <option value="{{type}}">{{device}}</option>
+
+    {% endfor %}
+
+  </select> <br/>
+
+
+
+
+
+  <label for="device_description" class="form_label">Device Description:</label>
+  <textarea name="description" id="inputNationality" class="form-control" placeholder="Device Description"></textarea>
+ <hr/>
+
+  <label for="City" class="form_label">Device Description:</label>
+  <textarea name="city" id="inputCity" class="form-control" placeholder="City"></textarea>
+ <hr/>
+      <label for="Branch" class="form_label">Device Description:</label>
+  <textarea name="branch" id="inputBranch" class="form-control" placeholder="Branch"></textarea>
+ <hr/>
+
+
+
+  <label for="code" class="form_label">Device Code:</label>
+  <input type="text" name="code" id="inputdveiceCode" class="form-control" placeholder="Device Code" required>
+<hr/>
+
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+</form>
+
+
+{% endblock content %}

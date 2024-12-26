@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+    color: #94650A;
+  }
+  .h5{
+    color: #94650A;
+  }
+
+  .inputDateOfReg {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+  [type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  }
+
+  [type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    color: #94650A;
+  }
+
+
+
+}
+
+</style>
+
+
+  {%for info in device_info %}
+  <section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+       <h5 class="h3 mb-3 font-weight-normal" > Device  </h5>
+          <div class="center mb-3 font-weight-norma text-center"  >
+            <a href="/device/all"><button type="button" class="btn btn-primary ms-1">Return To Devices</button></a>
+        </div>
+        </div>
+
+      </div>
+
+  
+      <div class="row">
+        <div class="col-lg-4">
+
+
+
+
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-header ">
+              <h5 class="mb-4"> Full Details </h5>
+              <a href="/client/update?client={{info.id}}"><button type="button" class="btn btn-primary ms-1">Edit</button></a>
+              
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Device Description (Model)</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{info.device_model}}  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Device Number</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{info.device_number}} </p>
+                </div>
+              </div>
+                <hr>
+               <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Device Holder</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{info.transporter.company_title|title}}  </p>
+                </div>
+              </div>
+              <hr>
+
+               <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Devcie Type </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{info.device_type}}</p>
+                  </div>
+                </div>
+                  <hr>
+
+
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Registered By </p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{info.created_by.first_name}} {{info.created_by.lastname_name}} </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="card mb-4 mb-lg-1">
+
+             {% if info.device_status == active_status %}
+            <div class="card-header card-info " style="background-color: #0e7808;">
+              <h5 class="mb-4"> Device Activated </h5>
+            </div>
+                {% endif %}
+             {% if info.device_status == deactive_status %}
+                <div class="card-header btn-success btn-blockcard-info " style="background-color: #ff593a;">
+              <h5 class="mb-4"> Device De-Activated </h5>
+            </div>
+              {% endif %}
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  {% if info.device_status == active_status %}
+                  <i class="fas fa-globe fa-lg text-warning"> This will Deactivate account and Prevent Device Login</i>
+                  <a href="/device/update/status?device={{info.id}}"><button type="button" class="btn btn-warning ms-1">De-Activate Device</button></a>
+                  {% endif %}
+                    {% if info.device_status == deactive_status %}
+                     <i class="fas fa-globe fa-lg text-success"> This will Activate account </i>
+                      <a href="/device/update/status?device={{info.id}}"><button type="button" class="btn btn-success ms-1">Activate Device</button></a>
+                    {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+            <div class="card mb-4 mb-lg-1">
+            <div class="card-header card-info " style="background-color: red;">
+              <h5 class="mb-4"> Delete Account </h5>
+            </div>
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                     <i class="fas fa-globe fa-lg text-success" style="font-weight:bold; color:red;"> This will delete account. Warning This cannot be undone!!!</i>
+                      <a href="/device/update/delete?device={{info.id}}"><button type="button" class="btn btn-danger ms-1">Delete Device</button></a>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% empty %}
+  <section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+         <h5 class="h3 mb-3 font-weight-normal" > Account Information cannot be aquired, Please complete your Registration </h5>
+          <div class="col align-center" style="background-color:grey;">
+              <p> Please Click to complete User Information</p>
+              <a href="/client/create?client={{client}}"><button type="button" class="btn btn-primary btn-block">Complete User Informantion</button></a>
+          </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  {%endfor%}
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+<style type="text/css">
+	@media (min-width: 768px) {
+	  html {
+	    font-size: 16px;
+	  }
+	}
+
+	.pricing-header {
+	  max-width: 700px;
+	}
+
+	.card-deck .card {
+	  min-width: 220px;
+	}
+	.p_navbar{
+	 background-color: #010E1F;
+	}
+	.buttonRow{
+		display: flex;
+		margin: 2px;
+	}
+</style>
+
+<!-- Header -->
+<!---BANNER IMAGE --->
+{% load static %}
+<img src="{% static 'banner2.jpg' %}" alt="My image" width="100%" height="50%">
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3  border-bottom shadow-sm p_navbar">
+  <h5 class="my-0 mr-md-auto font-weight-bold">
+  	{% if request.user.is_authenticated %}
+  		<p style="color:White;">Hello, {{request.user.firstname}} {{request.user.lastname}}</p>
+  	{% endif %}
+  </h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+  	{% if request.user.is_authenticated %}
+	  	<a class="p-4 text-light font-weight-bold" style="color:White;" href="{% url 'home' %}">Home</a>
+	    <a class="p-4 text-light font-weight-bold" style="color:White;"  href="{% url 'logout' %}">Logout</a>
+
+	 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+	  <div class="buttonRow" >
+		  <div class="dropdown" style="margin-right:10px;" >
+			  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Accounts
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+						<a class="dropdown-item" href="{% url 'account' %}">Profile</a>
+
+				  <!--Check usertype is superuser-->
+
+				  		<a class="dropdown-item" href="{% url 'add_teller' %}">Add Teller</a>
+
+
+
+				  		<a class="dropdown-item" href="{% url 'add_supervisor' %}">Add Supervisor</a>
+
+
+
+
+					<a class="dropdown-item" href="{% url 'password_change' %}">Reset Password</a>
+
+			  </div>
+		  </div>
+		  <div class="dropdown" style="margin-right:10px;">
+			  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Administration
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+						<a class="dropdown-item" href="{% url 'vendors' %}">Vendor </a>
+
+				  <!--Check usertype is superuser-->
+
+				  		<a class="dropdown-item" href="{% url 'devices' %}">Device </a>
+
+
+			  </div>
+
+			</div>
+		   <div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Services
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+						<a class="dropdown-item" href="{% url 'sales' %}">M-Transactions</a>
+
+				  <!--Check usertype is superuser-->
+
+				  		<a class="dropdown-item" href="{% url 'attendance' %}">Attendance</a>
+
+
+
+
+					<a class="dropdown-item" href="{% url 'expenses' %}">Expenses</a>
+
+
+
+
+			  </div>
+
+
+
+			</div>
+		</div>
+	  {% else %}
+		<a class="p-2 text-dark" href="{% url 'home' %}">Home</a>
+	    <a class="p-2 text-dark" href="{% url 'login' %}">Login</a>
+
+	{% endif %}
+
+  </nav>
+</div>
+
+
+<!-- End Header -->

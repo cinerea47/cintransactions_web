@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style type="text/css">
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+    color: #94650A;
+  }
+  .h5{
+    color: #94650A;
+  }
+
+  .inputDateOfReg {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+  [type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  }
+
+  [type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    color: #94650A;
+  }
+
+
+
+}
+
+</style>
+
+<div>
+<form class="form-signin" method="post">{% csrf_token %}
+
+  <h1 class="h3 mb-3 font-weight-normal"> Device Activation</h1>
+
+
+ <h4 class="h5 mb-3 font-weight-normal"> Device Details</h4>
+
+ <p>
+     <strong>
+                Device Description: <span style="color: #94650A;"> {{ device.description}}  </span>
+         <br/>  Device Number: <span style="color: #94650A;"> {{ device.device_number}}  </span>
+         <br/>  Device Type:<span style="color: #94650A;"> {{ device.type}}</span>
+         <br/>  Device City :<span style="color: #94650A;"> {{ device.city}}</span>
+         <br/>  Device Branch:<span style="color: #94650A;"> {{ device.branch}}</span>
+     </strong>
+ </p>
+    <hr/>
+
+
+    <div>
+        <p >
+            Your activation code is <b>{{activation_code}}</b>
+            <br/> Please Do not refresh page...
+        </p>
+    </div>
+
+    <div class="d-flex flex-row m-auto" style="background-color:#01434B; padding:6px;">
+    <a class="btn btn-primary" href="/vendor/device/all">
+      Return
+    </a>
+
+
+   </div>
+
+ 
+</form>
+</div>
+
+{% endblock content %}

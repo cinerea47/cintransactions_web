@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style type="text/css">
+  .home_heading {
+  	color: #BC861C;
+  }
+</style>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center ">
+  <h1 id="home_heading" class="display-4 font-weight-bold home_heading">Cinerea Money Web App </h1>
+  <p class="lead"> .</p>
+</div>
+<hr>
+
+<div class="container">
+	<div class="d-flex flex-column">
+		<h3>Data Capture</h3>
+		<div>
+			{% load static %}
+			<img src="{% static 'business_640.jpg' %}" alt="My image" width="45%">
+			<div class="flex-flow: row wrap;">
+				<h4>More Resources</h4>
+				<ul>
+					<il>
+						  	<a class="p-2 text-dark" href="https://www.cinerea-us.com/">Cinerea Home</a>
+					</il>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
